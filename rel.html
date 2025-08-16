@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>العالم الإجرامي </title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: #0d0d0d;
+    color: white;
+    margin: 0;
+}
+.navbar {
+    background-color: #1a1a1a;
+}
+.navbar-brand img {
+    height: 40px;
+    margin-left: 10px;
+}
+.article-card {
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.article-card:hover {
+    transform: scale(1.02);
+}
+.article-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.article-card .content {
+    padding: 15px;
+    flex: 1;
+}
+.article-card .title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+.article-card .desc {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 5px;
+}
+.article-card .btn {
+    margin-top: 10px;
+}
+.article-content {
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+.article-content img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.article-section {
+    margin-top: 20px;
+}
+.article-section h2 {
+    font-size: 20px;
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<!-- هيدر -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="c:\Users\Salim\Desktop\avatar.png." alt="شعار العالم الإجرامي">
+            العالم الإجرامي
+        </a>
+    </div>
+</nav>
+
+<div class="container mt-4" id="main-content">
+    <!-- سيتم ملء المحتوى عبر JavaScript -->
+</div>
+
+<script>
+const articles = [
+    {
+        id: 1,
+        title: "قوانين العصابات",
+        desc: "تحمل هذه الصفحة جميع قوانين العصابات بمختلف أنواعها",
+        img: "c:\\Users\\Salim\\Downloads\\gangu.png",
+        content: `
+            <div class="article-section">
+                <h2>مقدمة</h2>
+                <p>العصابات الكبرى تعتمد على مزيج من القوة، المال، والاتصالات السرية لبسط نفوذها.</p>
+            </div>
+            <div class="article-section">
+                <h2>التأثير على المجتمع</h2>
+                <p>غالبًا ما تتغلغل العصابات في أنظمة الحكم والاقتصاد، وتؤثر بشكل مباشر على استقرار الدول.</p>
+            </div>
+            <div class="article-section">
+                <h2>قضايا مشهورة</h2>
+                <p>شهد التاريخ العديد من العمليات الأمنية التي أطاحت بزعماء بارزين.</p>
+            </div>
+        `
+    },
+    {
+        id: 2,
+        title: "أخطر المطاردات الإجرامية",
+        desc: "قصص حقيقية لمطاردات انتهت بشكل غير متوقع...",
+        img: "article2.jpg",
+        content: `
+            <div class="article-section">
+                <h2>مقدمة</h2>
+                <p>في هذا المقال نستعرض أشهر وأخطر المطاردات الإجرامية التي وقعت عبر التاريخ.</p>
+            </div>
+            <div class="article-section">
+                <h2>أحداث بارزة</h2>
+                <p>بعض هذه المطاردات انتهت بنهايات مأساوية أو مثيرة للدهشة.</p>
+            </div>
+        `
+    },
+    {
+        id: 3,
+        title: "أشهر زعماء المافيا",
+        desc: "سيرة أشهر الشخصيات التي تركت بصمتها في عالم الجريمة...",
+        img: "article3.jpg",
+        content: `
+            <div class="article-section">
+                <h2>البداية</h2>
+                <p>تعرف على حياة زعماء المافيا وكيف بدأوا مسيرتهم الإجرامية.</p>
+            </div>
+            <div class="article-section">
+                <h2>النفوذ</h2>
+                <p>كيف وصلوا إلى القمة وسيطروا على مناطق واسعة.</p>
+            </div>
+        `
+    }
+];
+
+// جلب ID المقال من الرابط
+const urlParams = new URLSearchParams(window.location.search);
+const articleId = urlParams.get('id');
+
+const container = document.getElementById('main-content');
+
+if(articleId) {
+    // عرض تفاصيل المقال
+    const article = articles.find(a => a.id == articleId);
+    if(article) {
+        container.innerHTML = `
+            <div class="article-content">
+                <img src="${article.img}" alt="صورة المقال">
+                <h1>${article.title}</h1>
+                ${article.content}
+                <br>
+                <button onclick="goBack()" class="btn btn-warning mt-3">⬅ رجوع</button>
+            </div>
+        `;
+    } else {
+        container.innerHTML = `<p>المقال غير موجود.</p>`;
+    }
+} else {
+    // عرض قائمة المقالات
+    let html = `<div class="row">`;
+    articles.forEach(a => {
+        html += `
+            <div class="col-md-4 mb-4">
+                <div class="article-card">
+                    <img src="${a.img}" alt="${a.title}">
+                    <div class="content">
+                        <div class="title">${a.title}</div>
+                        <div class="desc">${a.desc}</div>
+                        <a href="?id=${a.id}" class="btn btn-primary btn-sm">اقرأ المزيد</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+}
+</script>
+
+<script>
+function goBack() {
+    if (document.referrer !== "" && document.referrer.includes(window.location.hostname)) {
+        // يرجع للصفحة السابقة في الموقع
+        window.history.back();
+    } else {
+        // لو دخلت المقال مباشرة من رابط خارجي (مثلاً من فيسبوك)، يرجع للقائمة الرئيسية
+        window.location.href = "index.html";
+    }
+}
+</script>
+
+</body>
+</html>
+<script>
